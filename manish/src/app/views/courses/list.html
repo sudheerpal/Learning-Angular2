@@ -1,0 +1,8 @@
+<h2>Courses</h2>
+<ul class="items">
+    <li *ngFor="let course of courses | async" [class.selected]="isSelected(course)" (click)="onSelect(course)">
+
+        <span class="badge">{{ course.id }}</span> {{ course.name }}
+
+    </li>
+</ul>

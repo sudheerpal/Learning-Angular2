@@ -1,0 +1,39 @@
+<!-- Form Validation Reference site: 
+    https://scotch.io/tutorials/angular-2-form-validation
+    https://scotch.io/tutorials/how-to-implement-conditional-validation-in-angular-2-model-driven-forms
+-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-push-3">
+
+      <div class="jumbotron">
+        <h2>Submit Your Idea Here</h2>
+        <hr>
+        <!-- Right of the bat, we no longer declare a local variable but use the formGroup directive and set it the ideaForm object we defined in the constructor.
+     Throughout the form, we will reference the ideaForm root object as can be seen in the submitForm function.-->
+        <form [formGroup]="ideaForm" (ngSubmit)="submitForm(ideaForm.value)">
+          <div class="form-group" [ngClass]="{'has-error':!ideaForm.controls['projectName'].valid && ideaForm.controls['projectName'].touched}">
+            <label>Project Name: <span class="required">*</span></label>
+            <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the ideaForm object. 
+        Notice that we are also setting the attribute we wish the corresponding input to sync with. 
+        We no longer need the name attribute, but can optionally add it. -->
+            <input class="form-control" type="text" placeholder="Project Name" [formControl]="ideaForm.controls['projectName']">
+            <div *ngIf="ideaForm.controls['projectName'].hasError('required') && ideaForm.controls['projectName'].touched" class="alert alert-danger">Please enter a project name.</div>
+            <div *ngIf="ideaForm.controls['projectName'].hasError('minlength') && ideaForm.controls['projectName'].touched" class="alert alert-danger">Project name must be at least 10 characters long.</div>
+            <div *ngIf="ideaForm.controls['projectName'].hasError('maxlength') && ideaForm.controls['projectName'].touched" class="alert alert-danger">Project name cannot exceed 100 characters.</div>
+          </div>
+          <div class="form-group" [ngClass]="{'has-error':!ideaForm.controls['description'].valid && ideaForm.controls['description'].touched}">
+            <label>Your Idea: <span class="required">*</span></label>
+            <textarea class="form-control textarea" type="text" placeholder="Your Idea" [formControl]="ideaForm.controls['description']"></textarea>
+            <div *ngIf="ideaForm.controls['description'].hasError('required') && ideaForm.controls['description'].touched" class="alert alert-danger">Please enter your idea.</div>
+            <div *ngIf="ideaForm.controls['description'].hasError('minlength') && ideaForm.controls['description'].touched" class="alert alert-danger">Idea must be at least 20 characters long.</div>
+            <div *ngIf="ideaForm.controls['description'].hasError('maxlength') && ideaForm.controls['description'].touched" class="alert alert-danger">Idea cannot exceed 250 characters.</div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" [disabled]="!ideaForm.valid">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

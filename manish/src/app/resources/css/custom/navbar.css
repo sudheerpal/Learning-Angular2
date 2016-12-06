@@ -1,0 +1,29 @@
+/* Navigation link styles */
+.navbar ul {
+  list-style: none;
+  padding:0;
+  margin: 0;
+  background-color: #039be5;
+  width: 100%;
+  display: inline-block;
+}
+.navbar ul li {  
+  padding:0;
+  margin: 0;
+  float: left;
+}
+.navbar ul li a {
+  padding: 10px;
+  text-decoration: none;  
+  display: block;
+}
+.navbar ul li a:visited, .navbar ul li a:link {
+  color: #fff;  
+}
+.navbar ul li a:hover {
+  color: #039be5;
+  background-color: #CFD8DC;
+}
+.navbar ul li a.active {
+  background-color: #607D8B;
+}
